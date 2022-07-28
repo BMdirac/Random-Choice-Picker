@@ -1,4 +1,4 @@
-const tagsEl = document.getElementById('tags')
+const tagsEl = document.getElementById('tags') // tagsEl => tags Element
 const textarea = document.getElementById('textarea')
 
 // this is needed so that if we go to the page it will automatically put the cursor in the textarea
@@ -22,7 +22,7 @@ function createTags(input) {
     // filter helps to return certain things based on conditionals(here it helps to trim out white space)
     const tags = input.split(',').filter(tag => tag.trim() !== '').map(tag => tag.trim())
 
-    tagsEl.innerHTML = ''
+    tagsEl.innerHTML = '' // we need to clear this otherwise it will pile up
 
     // to loop through the tags use forEach
     tags.forEach(tag => {
@@ -34,9 +34,10 @@ function createTags(input) {
 }
 
 function randomSelect() {
-    // the number of time its going to select each one before it stops
+    // the number of times its going to select each choice before it stops on one of them
     const times = 30 
 
+    // this is to set the interval for the highlight and the remove of highlight of each choice
     const interval = setInterval(() => {
         const randomTag = pickRandomTag()
 
@@ -44,19 +45,21 @@ function randomSelect() {
 
         setTimeout(() => {
             unHighlightTag(randomTag)
-        }, 100)
-    }, 100);
+        }, 100) // this should happen every one hundred mili seconds
+    }, 100); 
 
-    // pick a random tag to stop on
+    
     setTimeout(() => {
         clearInterval(interval)
 
+        // this pick a random tag to land on and highlight
         setTimeout(() => {
             const randomTag = pickRandomTag()
 
             highlightTag(randomTag)
-        }, 100)
+        }, 100) // note that the setTimeout time here should be the same as the one above
     }, times*100)
+
 
 }
 
